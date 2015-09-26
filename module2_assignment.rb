@@ -9,33 +9,47 @@ class LineAnalyzer
   #* line_number      - the line number analyzed (provided)
   attr_accessor :highest_wf_count, :highest_wf_words, :content, :line_number
 
-  #Add the following methods in the LineAnalyzer class.
-  #* initialize() - taking a line of text (content) and a line number
-  #* calculate_word_frequency() - calculates result
-
   #Implement the initialize() method to:
   #* take in a line of text and line number
   #* initialize the content and line_number attributes
   #* call the calculate_word_frequency() method.
-  def initialize(content, line)
-    self.content = content
-    self.line = line
+
+  def highest_wf_count= (number)
+    @highest_wf_count = number
   end
+
+  def initialize(content, line)
+    @content = content
+    @line_number = line
+    @highest_wf_count=0
+    calculate_word_frequency()
+  end
+
+  #Add the following methods in the LineAnalyzer class.
+  #* initialize() - taking a line of text (content) and a line number
+  #* calculate_word_frequency() - calculates result
+
   #Implement the calculate_word_frequency() method to:
   #* calculate the maximum number of times a single word appears within
   #  provided content and store that in the highest_wf_count attribute.
   #* identify the words that were used the maximum number of times and
   #  store that in the highest_wf_words attribute.
+
   def calculate_word_frequency()
-    h = Hash.new
+    @highest_wf_words = Hash.new
     words = @content.split
     words.each { |w|
-      if h.has_key?(w)
-        h[w] += 1
+      if @highest_wf_words.has_key?(w)
+        @highest_wf_words[w] += 1
       else
-        h[w] = 1
+        @highest_wf_words[w] = 1
       end
     }
+    @highest_wf_words.each do |key, value|
+      if value > @highest_wf_count
+        @highest_wf_count = value
+      end
+    end
   end
 end
 
