@@ -55,17 +55,31 @@ end
 
 #  Implement a class called Solution.
 class Solution
-
   # Implement the following read-only attributes in the Solution class.
   #* highest_count_across_lines - a number with the value of the highest frequency of a word
   #* highest_count_words_across_lines - an array with the words with the highest frequency
-attr_reader :highest_count_across_lines, :highest_count_words_across_lines
+  attr_reader :highest_count_across_lines, :highest_count_words_across_lines, :analyzers
+
+  def initialize()
+    @analyzers = Array.new
+  end
+
   # Implement the following methods in the Solution class.
   #* analyze_file() - processes 'test.txt' intro an array of LineAnalyzers
+  def analyze_file()
+    File.foreach('test.txt') do |content, line|
+      lineAnalyzer = LineAnalyzer.new(content, line)
+      @analyzers << lineAnalyzer
+    end
+  end
   #* calculate_line_with_highest_frequency() - determines which line of
   #text has the highest number of occurrence of a single word
+  def calculate_line_with_highest_frequency()
+  end
   #* print_highest_word_frequency_across_lines() - prints the words with the
   #highest number of occurrences and their count
+  def print_highest_word_frequency_across_lines()
+  end
 
   # Implement the analyze_file() method() to:
   #* Read the 'test.txt' file in lines
