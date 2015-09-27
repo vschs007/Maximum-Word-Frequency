@@ -45,6 +45,7 @@ class LineAnalyzer
         @highest_wf_words[w] = 1
       end
     }
+    @highest_wf_words.sort_by { |word, count| count }
     @highest_wf_words.each do |key, value|
       if value > @highest_wf_count
         @highest_wf_count = value
@@ -76,18 +77,25 @@ class Solution
   #text has the highest number of occurrence of a single word
   def calculate_line_with_highest_frequency()
     @highest_count_across_lines = 0
+    @highest_count_words_across_lines = Array.new
     @analyzers.each do |analyzer|
       if analyzer.highest_wf_count > @highest_count_across_lines
         @highest_count_across_lines = analyzer.highest_wf_count
       end
+      analyzer.highest_wf_words.each do |key, value|
+        #if analyzer.highest_count_words_across_lines < value
+          @highest_count_words_across_lines << key
+        #end
+      end
     end
-    return @highest_count_across_lines
   end
   #* print_highest_word_frequency_across_lines() - prints the words with the
   #highest number of occurrences and their count
   def print_highest_word_frequency_across_lines()
-  end
+    @highest_count_words_across_lines = Array.new
+    puts "The following words have the highest word frequency per line:"
 
+  end
   # Implement the analyze_file() method() to:
   #* Read the 'test.txt' file in lines
   #* Create an array of LineAnalyzers for each line in the file
@@ -96,8 +104,11 @@ class Solution
   #* calculate the highest number of occurences of a word across all lines
   #and stores this result in the highest_count_across_lines attribute.
   #* identifies the words that were used with the highest number of occurrences
-  #and stores them in print_highest_word_frequency_across_lines.
+  #and stores them in highest_word_frequency_across_lines.
 
   #Implement the print_highest_word_frequency_across_lines() method to
   #* print the result in the following format
+  #  The following words have the highest word frequency per line:
+  #  ["word1"] (appears in line #)
+  #  ["word2", "word3"] (appears in line #)
 end
