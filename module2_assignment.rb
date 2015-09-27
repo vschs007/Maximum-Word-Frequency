@@ -75,6 +75,13 @@ class Solution
   #* calculate_line_with_highest_frequency() - determines which line of
   #text has the highest number of occurrence of a single word
   def calculate_line_with_highest_frequency()
+    @highest_count_across_lines = 0
+    @analyzers.each do |analyzer|
+      if analyzer.highest_wf_count > @highest_count_across_lines
+        @highest_count_across_lines = analyzer.highest_wf_count
+      end
+    end
+    return @highest_count_across_lines
   end
   #* print_highest_word_frequency_across_lines() - prints the words with the
   #highest number of occurrences and their count
